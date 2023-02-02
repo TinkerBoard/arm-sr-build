@@ -81,11 +81,11 @@ U-BOOT_EXPORTS ?= \
 
 U-BOOT_DEFCONFIG_FILES := \
 	$(U-BOOT_PATH)/configs/leez-rk3399_defconfig \
-	$(ROOT)/build/kconfig/Leez-P710.config
+	$(ROOT)/build/kconfig/Tinker_Board_2.config
 
 U-BOOT_PATCHES := \
 	$(ROOT)/build/0001-CapsuleCommon.patch \
-	$(ROOT)/build/0002-Leez-DFU.patch
+	$(ROOT)/build/0002-Tinker_Board_2-DFU.patch
 
 
 .PHONY: u-boot
