@@ -80,13 +80,13 @@ U-BOOT_EXPORTS ?= \
 	ARCH=arm64
 
 U-BOOT_DEFCONFIG_FILES := \
-	$(U-BOOT_PATH)/configs/leez-rk3399_defconfig \
+	$(U-BOOT_PATH)/configs/tinker-board-2_defconfig \
 	$(ROOT)/build/kconfig/Tinker_Board_2.config
 
 U-BOOT_PATCHES := \
 	$(ROOT)/build/0001-CapsuleCommon.patch \
 	$(ROOT)/build/0002-Tinker_Board_2-DFU.patch \
-	$(ROOT)/build/0003-Tinker_Board_2-baudrate.patch
+	$(ROOT)/build/0003-Tinker_Board_2-dts-defconfig.patch
 
 
 .PHONY: u-boot
