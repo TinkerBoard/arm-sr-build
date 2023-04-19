@@ -107,7 +107,8 @@ u-boot: arm-tf
 .PHONY: capsule
 capsule: arm-tf
 	cd $(U-BOOT_PATH) && \
-		git reset --hard refs/tags/v2021.07
+		git reset --hard refs/tags/v2021.07 && \
+		git clean -fdx
 	cd $(U-BOOT_PATH) && \
 		git apply $(U-BOOT_PATCHES)
 	
