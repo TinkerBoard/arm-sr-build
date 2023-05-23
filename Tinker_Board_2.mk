@@ -10,6 +10,7 @@ override COMPILE_S_KERNEL  := 32
 
 
 OPTEE_OS_PLATFORM = rockchip
+LOOP_DEVICE := $(shell losetup -f)
 
 include common.mk
 
@@ -103,6 +104,21 @@ u-boot: arm-tf
 	cd $(U-BOOT_PATH) && \
 		scripts/kconfig/merge_config.sh -O $(BINARIES_PATH)/u-boot $(U-BOOT_DEFCONFIG_FILES)
 	$(U-BOOT_EXPORTS) $(MAKE) -C $(U-BOOT_PATH) O=$(BINARIES_PATH)/u-boot all
+
+	dd if=/dev/zero of=$(BINARIES_PATH)/u-boot/tb2-firmware-efi.img bs=1M count=128
+	parted $(BINARIES_PATH)/u-boot/tb2-firmware-efi.img mklabel gpt
+	parted $(BINARIES_PATH)/u-boot/tb2-firmware-efi.img mkpart ESP fat32 16MiB 100%
+	parted $(BINARIES_PATH)/u-boot/tb2-firmware-efi.img set 1 esp on
+	losetup -P $(LOOP_DEVICE) $(BINARIES_PATH)/u-boot/tb2-firmware-efi.img
+	mkfs.vfat -F 32 -n "EFI System" $(LOOP_DEVICE)p1
+	mkdir tmp
+	mount $(LOOP_DEVICE)p1 tmp
+	cp -r efi/ tmp/
+	umount tmp
+	rm -rf tmp/
+	losetup -d $(LOOP_DEVICE)
+	dd if=$(BINARIES_PATH)/u-boot/u-boot-rockchip.bin of=$(BINARIES_PATH)/u-boot/tb2-firmware-efi.img conv=notrunc seek=64
+	sync
 
 .PHONY: capsule
 capsule: arm-tf
