@@ -1,6 +1,6 @@
-commit 6e8a27405b9b7af4db52ed36e5b1dcae3e6e4b53
+commit d367c48c1c5c2bdc16c2708b084686ff5d5294ea
 Author: frank_chiang <frank_chiang@asus.com>
-Date:   Tue Feb 21 19:04:55 2023 +0800
+Date:   Tue Jan 16 15:50:36 2024 +0800
 
     Add dts and defconfig for Tinker Board 2
 
@@ -14,7 +14,7 @@ index 9fb38682e6..c56f2c2384 100644
  	rk3399-rockpro64.dtb \
 +	rk3399-tinker-board-2.dtb \
  	rk3399pro-rock-pi-n10.dtb
-
+ 
  dtb-$(CONFIG_ROCKCHIP_RV1108) += \
 diff --git a/arch/arm/dts/rk3399-tinker-board-2-u-boot.dtsi b/arch/arm/dts/rk3399-tinker-board-2-u-boot.dtsi
 new file mode 100644
@@ -41,10 +41,10 @@ index 0000000000..c638ce2597
 +};
 diff --git a/arch/arm/dts/rk3399-tinker-board-2.dts b/arch/arm/dts/rk3399-tinker-board-2.dts
 new file mode 100644
-index 0000000000..dce2289fcb
+index 0000000000..9d0af0e114
 --- /dev/null
 +++ b/arch/arm/dts/rk3399-tinker-board-2.dts
-@@ -0,0 +1,645 @@
+@@ -0,0 +1,643 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Copyright (c) 2019 Andy Yan <andy.yan@gmail.com>
@@ -559,8 +559,6 @@ index 0000000000..dce2289fcb
 +
 +&sdhci {
 +	bus-width = <8>;
-+	mmc-hs400-1_8v;
-+	mmc-hs400-enhanced-strobe;
 +	non-removable;
 +	status = "okay";
 +};
@@ -697,7 +695,7 @@ index 25e308d186..887c30b4dc 100644
 @@ -30,6 +30,12 @@ S:      Maintained
  F:	arch/arm/dts/rk3399-leez-p710-u-boot.dtsi
  F:	configs/leez-rk3399_defconfig
-
+ 
 +TINKER-BOARD-2
 +M:	Frank Chiang <frank_chiang@asus.com>
 +S:	Maintained
