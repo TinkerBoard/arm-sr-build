@@ -87,7 +87,8 @@ U-BOOT_DEFCONFIG_FILES := \
 U-BOOT_PATCHES := \
 	$(ROOT)/build/0001-CapsuleCommon.patch \
 	$(ROOT)/build/0002-Tinker_Board_2-DFU.patch \
-	$(ROOT)/build/0003-Tinker_Board_2-dts-defconfig.patch
+	$(ROOT)/build/0003-Tinker_Board_2-dts-defconfig.patch \
+	$(ROOT)/build/0004-Test-mmc-before-setting-up-env-device.patch
 
 
 .PHONY: u-boot
