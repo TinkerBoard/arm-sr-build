@@ -1,5 +1,14 @@
+From ed57f537a17d924424b81b8ca61a94f8973905f9 Mon Sep 17 00:00:00 2001
+From: frank_chiang <frank_chiang@asus.com>
+Date: Mon, 25 Mar 2024 16:26:55 +0800
+Subject: [PATCH 1/1] Add DFU alternative function for evb-rk3399
+
+---
+ board/rockchip/evb_rk3399/evb-rk3399.c | 36 ++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+
 diff --git a/board/rockchip/evb_rk3399/evb-rk3399.c b/board/rockchip/evb_rk3399/evb-rk3399.c
-index abb76585cf..bb8380f320 100644
+index abb76585cf..169420e925 100644
 --- a/board/rockchip/evb_rk3399/evb-rk3399.c
 +++ b/board/rockchip/evb_rk3399/evb-rk3399.c
 @@ -10,6 +10,9 @@
@@ -12,7 +21,7 @@ index abb76585cf..bb8380f320 100644
  #ifndef CONFIG_SPL_BUILD
  int board_early_init_f(void)
  {
-@@ -30,3 +33,27 @@ out:
+@@ -30,3 +33,36 @@ out:
  	return 0;
  }
  #endif
@@ -34,9 +43,21 @@ index abb76585cf..bb8380f320 100644
 +		return;
 +	dev_num = simple_strtoul(devstr ? devstr:"0", NULL, 10);
 +	mmc = find_mmc_device(dev_num);
++
++	int err = mmc_get_op_cond(mmc);
++	if (err) {
++		if (dev_num)
++			mmc = find_mmc_device(0);
++		else
++			mmc = find_mmc_device(1);
++	}
++
 +	if (!mmc || mmc_init(mmc))
 +		return;
 +	alt_info = IS_SD(mmc) ? CONFIG_DFU_ALT_BOOT_SD : CONFIG_DFU_ALT_BOOT_EMMC;
 +	env_set("dfu_alt_info", alt_info);
 +}
 +#endif
+-- 
+2.25.1
+

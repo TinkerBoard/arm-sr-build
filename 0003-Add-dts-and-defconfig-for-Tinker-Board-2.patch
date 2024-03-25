@@ -1,8 +1,18 @@
-commit d367c48c1c5c2bdc16c2708b084686ff5d5294ea
-Author: frank_chiang <frank_chiang@asus.com>
-Date:   Tue Jan 16 15:50:36 2024 +0800
+From 997f4ea3adbf629a6cf22e88d9ba5408bfbdcf51 Mon Sep 17 00:00:00 2001
+From: frank_chiang <frank_chiang@asus.com>
+Date: Mon, 25 Mar 2024 16:33:14 +0800
+Subject: [PATCH 1/1] Add dts and defconfig for Tinker Board 2
 
-    Add dts and defconfig for Tinker Board 2
+---
+ arch/arm/dts/Makefile                         |   1 +
+ .../arm/dts/rk3399-tinker-board-2-u-boot.dtsi |  17 +
+ arch/arm/dts/rk3399-tinker-board-2.dts        | 643 ++++++++++++++++++
+ board/rockchip/evb_rk3399/MAINTAINERS         |   6 +
+ configs/tinker-board-2_defconfig              |  57 ++
+ 5 files changed, 724 insertions(+)
+ create mode 100644 arch/arm/dts/rk3399-tinker-board-2-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3399-tinker-board-2.dts
+ create mode 100644 configs/tinker-board-2_defconfig
 
 diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
 index 9fb38682e6..c56f2c2384 100644
@@ -707,10 +717,10 @@ index 25e308d186..887c30b4dc 100644
  S:	Maintained
 diff --git a/configs/tinker-board-2_defconfig b/configs/tinker-board-2_defconfig
 new file mode 100644
-index 0000000000..8340d10ab2
+index 0000000000..d78ee1f589
 --- /dev/null
 +++ b/configs/tinker-board-2_defconfig
-@@ -0,0 +1,56 @@
+@@ -0,0 +1,57 @@
 +CONFIG_ARM=y
 +CONFIG_ARCH_ROCKCHIP=y
 +CONFIG_SYS_TEXT_BASE=0x00200000
@@ -767,3 +777,7 @@ index 0000000000..8340d10ab2
 +CONFIG_USB_ETHER_SMSC95XX=y
 +CONFIG_SPL_TINY_MEMSET=y
 +CONFIG_ERRNO_STR=y
++CONFIG_SET_DFU_ALT_INFO=y
+-- 
+2.25.1
+
